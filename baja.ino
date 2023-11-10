@@ -33,6 +33,10 @@ bool shiftL;
 bool shiftM;
 bool shiftH;
 
+bool L = 0;
+bool M = 0;
+bool H = 0;
+
 bool danger = 0;
 bool safety = 0;
 
@@ -70,11 +74,12 @@ void loop(){
   check_shiftL();
   check_shiftM();
   check_shiftH();
+  shiftToL();
+  shiftToM();
+  shiftToH();
 
   if(automatic == 0){
-    shiftToL();
-    shiftToM();
-    shiftToH();
+    control_speed();
   }
   else{
     setMediumSpeed();
