@@ -42,10 +42,12 @@ bool check_danger(){
 
 
 void shiftToL(){
-  if(danger == 0){
-    if(safety == 1){
-      if(shiftL == 1){
-        setLowSpeed();
+  if(danger == 0){  // if there is no problem
+    if(safety == 1){ // if speed is in medium
+      if(shiftL == 1){ // if its time to shift to Low speed
+        L=1;//setLowSpeed();  // here the safety and SetLowSpeed() contradicts, 
+        M=0;                  // so if there is safety then store that its safe
+        H=0;                  // and store that store L can be on
       }
     }
   }
@@ -54,7 +56,9 @@ void shiftToL(){
 void shiftToM(){
   if(danger == 0){
    if(shiftM == 1){
-    setMediumSpeed();
+    M=1;//setMediumSpeed();
+    L=0;
+    H=0;
    }
  }
 }
@@ -62,8 +66,23 @@ void shiftToM(){
 void shiftToH(){
   if(danger == 0){
     if(safety == 1){
-      setHighSpeed();
-    }
+      if(shiftH == 1){
+      H=1;//setHighSpeed();
+      M=0;
+      L=0;
+     }
+   }
+  }
+} 
+
+void control_speed(){
+  if(L == 1){
+    setLowSpeed();
+  }
+  else if(M == 1){
+    setMediumSpeed();
+  }
+  else if(H == 1){
+    setHighSpeed();
   }
 }
-
